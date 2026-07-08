@@ -1,0 +1,67 @@
+@page "/Students"
+
+
+<h1>Students</h1>
+
+<table>
+
+    <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Sex</th>
+        <th>DateOfBirth</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Mother's Name</th>
+        <th>Father's Name</th>
+    </tr>
+
+    @foreach(var student in students){
+
+    <tr>
+        <td>@student.Id</td>
+        <td>@student.Name</td>
+        <td>@student.Sex</td>
+        <td>@student.DateOfBirth</td>
+        <td>@student.Phone</td>
+        <td>@student.Email</td>
+        <td>@student.Address</td>
+        <td>@student.MotherName</td>
+        <td>@student.FatherName</td>
+    </tr>
+    }
+</table>
+
+
+@code{
+    public class Student{
+        public int Id {get; set;}
+
+        public string Name {get; set;}
+
+        public string Sex {get; set;}
+
+        public DateTime DateOfBirth {get; set;}
+
+        public string Phone {get; set;}
+
+        public string Email {get; set;}
+
+        public string Address {get; set;}
+
+        public string MotherName {get; set;}
+
+        public string FatherName {get; set;}
+    }
+
+    private List<Student> students = new List<Student>();
+
+    protected override void OnInitialized()
+    {
+        students = new List<Student>{
+          new Student{Id=1,Address="Nyamagabe District Gasaka Sector",DateOfBirth= new DateTime(2005,04,14),Email="byiringirofiston33@gmail.com",FatherName="RWABUHIHI KIBABA",MotherName="Jacqeuline MUKANDUTIYE",Name="Fiston BYIRINGIRO", Phone="0791886292",Sex="Male"}, 
+          new Student{Id=2, Address="Kigali City Gasabo District ",DateOfBirth=new DateTime(2019,05,30),Email="kennedymukunzi@gmail.com",FatherName="Eric MURWANASHYAKA",MotherName="NYIRAKABONEYE Godsgiving",Name="Kennedy MUKUNZI",Phone="0790279865",Sex="Male"}
+            };
+    }
+}
