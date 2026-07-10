@@ -1,0 +1,46 @@
+@page "/Classes"
+<table>
+    <tr>
+        <th>Class ID</th>
+        <th>Class Name</th>
+        <th>Department</th>
+        <th>Faculity</th>
+        <th>Teacher</th>
+    </tr>
+
+    @foreach(var clever in kennedy){
+
+    <tr>
+        <td>@clever.id</td>
+        <td>@clever.classname</td>
+        <td>@clever.department</td>
+        <td>@clever.faculity</td>
+        <td>@clever.teacher</td>
+    </tr>
+
+    }
+</table>
+
+
+@code{
+    public class Class{
+        public int id {get; set;}
+
+        public string classname {get; set;}
+
+        public string department {get; set;}
+
+        public string faculity {get; set;}
+
+        public string teacher {get; set;}
+    }
+
+    private List<Class> kennedy = new List<Class>();
+
+    protected override void OnInitialized()
+    {
+        kennedy = new List<Class>{
+            new Class{id=1, classname="P1A", department="Lower Primary",faculity="N/A", teacher="UFITUMUGISHA Simeon Garou"}
+            };
+    }
+}
