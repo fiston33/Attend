@@ -1,4 +1,7 @@
 @page "/Classes"
+@using Application.Services.ClassServices
+
+@inject IClassServices ClassServices
 <table>
     <tr>
         <th>Class ID</th>
@@ -23,24 +26,12 @@
 
 
 @code{
-    public class Class{
-        public int id {get; set;}
-
-        public string classname {get; set;}
-
-        public string department {get; set;}
-
-        public string faculity {get; set;}
-
-        public string teacher {get; set;}
-    }
+    
 
     private List<Class> kennedy = new List<Class>();
 
     protected override void OnInitialized()
     {
-        kennedy = new List<Class>{
-            new Class{id=1, classname="P1A", department="Lower Primary",faculity="N/A", teacher="UFITUMUGISHA Simeon Garou"}
-            };
+       kennedy = ClassServices.GetAllClasses();
     }
 }
