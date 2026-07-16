@@ -4,6 +4,7 @@ using Application.Interfaces;
 using Infrastructure.Repositories;
 using Web.Components;
 using Infrastructure.DependencyInjection;
+using Application.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +15,9 @@ builder.Services.AddRazorComponents()
     // Registering Services
 
     builder.Services.AddScoped<IStudentService, StudentService>();
-    builder.Services.AddScoped<IClassServices, ClassServices>();
+    builder.Services.AddScoped<IClassService, ClassService>();
     builder.Services.AddInfrastructureService(builder.Configuration);
+    builder.Services.AddApplicationServices();
 
 
 var app = builder.Build();

@@ -1,7 +1,8 @@
 @page "/Classes"
 @using Application.Services.ClassServices
+@using Domain.Entities
 
-@inject IClassServices ClassServices
+@inject IClassService ClassService
 <table>
     <tr>
         <th>Class ID</th>
@@ -17,7 +18,7 @@
         <td>@clever.id</td>
         <td>@clever.classname</td>
         <td>@clever.department</td>
-        <td>@clever.faculity</td>
+        <td>@clever.FacultyId</td>
         <td>@clever.teacher</td>
     </tr>
 
@@ -32,6 +33,6 @@
 
     protected override void OnInitialized()
     {
-       kennedy = ClassServices.GetAllClasses();
+       kennedy = ClassService.GetAllClasses();
     }
 }

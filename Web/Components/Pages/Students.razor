@@ -16,10 +16,17 @@
         <th>DateOfBirth</th>
         <th>Phone</th>
         <th>Email</th>
+        <th>Reg Number</th>
         <th>Address</th>
         <th>Mother's Name</th>
         <th>Father's Name</th>
+        <th>Mother's Phone</th>
+        <th>Father's Phone</th>
+        <th>User Added</th>
+        <th>Date Added</th>
+
     </tr>
+
 
     @foreach(var student in students){
 
@@ -30,9 +37,14 @@
         <td>@student.DateOfBirth</td>
         <td>@student.Phone</td>
         <td>@student.Email</td>
+        <td>@student.RegNumber</td>
         <td>@student.Address</td>
         <td>@student.MotherName</td>
         <td>@student.FatherName</td>
+        <td>@student.MotherPhone</td>
+        <td>@student.FatherPhone</td>
+        <td>@student.UserAdded</td>
+        <td>@student.DateAdded</td>
     </tr>
     }
 </table>

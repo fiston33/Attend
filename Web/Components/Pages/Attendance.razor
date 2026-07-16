@@ -1,0 +1,35 @@
+@* @page "/Attendance"
+
+@using Application.Services.AttendanceServices
+@using Domain.Entities
+
+@inject IAttendanceService AttendanceService
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Student Id</th>
+        <th>Class Id </th>
+        <th>Atendance Date/Time</th>
+    </tr>
+
+    @foreach(var allia in Attends){
+
+    
+    <tr>
+        <td>@allia.Id</td>
+        <td>@allia.studentId</td>
+        <td>@allia.ClassId</td>
+        <td>@allia.AttendanceDateTime</td>
+    </tr>
+    }
+</table>
+
+@code{
+    private List<Attendance> Attends = new List<Attendance>();
+
+    protected override void OnInitialized()
+    {
+         Attends = AttendanceService.GetAllAttendance();
+    }
+} *@

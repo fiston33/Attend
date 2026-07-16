@@ -1,5 +1,6 @@
 using Domain.Entities;
 using Application.Interfaces;
+
 namespace Application.Services.StudentServices
 
 {
@@ -16,6 +17,7 @@ namespace Application.Services.StudentServices
            return _student.GetAllStudent();
         }
     }
+
 
 }
 

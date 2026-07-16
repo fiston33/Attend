@@ -2,9 +2,9 @@ using Domain.Entities;
 namespace Application.Interfaces
 {
     
-    public interface IStudent
+    public interface IClass
     {
-        public List<Student> GetAllStudent();
+        public List<Class> GetAllClasses();
     }
 }
 

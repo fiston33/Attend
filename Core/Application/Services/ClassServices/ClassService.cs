@@ -1,24 +1,23 @@
+using Application.Interfaces;
+using Domain.Entities;
+
 namespace Application.Services.ClassServices
 {
-    public class ClassServices : IClassServices
+    public class ClassService:IClassService
     {
-      public List<Class> GetAllClasses()
+        private readonly IClass _classs;
+
+        public ClassService(IClass classs)
         {
-             return new List<Class>{
-            new Class{id=1, classname="P1A", department="Lower Primary",faculity="N/A", teacher="UFITUMUGISHA Simeon Garou"}
-            };
+            _classs = classs;
+            
         }
-    }
 
-    public class Class{
-        public int id {get; set;}
+        public List<Class> GetAllClasses()
+        {
+            return _classs.GetAllClasses();
+        }
 
-        public string classname {get; set;}
 
-        public string department {get; set;}
-
-        public string faculity {get; set;}
-
-        public string teacher {get; set;}
     }
 }

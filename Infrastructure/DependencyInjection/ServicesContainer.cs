@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Application.Interfaces;
 using Infrastructure.Repositories;
+using Domain.Entities;
 namespace Infrastructure.DependencyInjection
 {
     public static class ServicesContainer
@@ -15,6 +16,8 @@ namespace Infrastructure.DependencyInjection
                 options.UseSqlServer(configuration.GetConnectionString("ATTENDCON"))
             );
             services.AddScoped<IStudent, StudentRepository>();
+            services.AddScoped<IClass,ClassRepository>();
+            services.AddScoped<IAttendance, AttendanceRepository>();
             return services;
 
         }

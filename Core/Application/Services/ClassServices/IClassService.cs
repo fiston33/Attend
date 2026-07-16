@@ -1,8 +1,13 @@
+using Domain.Entities;
 namespace Application.Services.ClassServices
 {
     
-    public interface IClassServices
+    public interface IClassService
     {
         public List<Class>  GetAllClasses();
     }
 }
+
+
+
+
