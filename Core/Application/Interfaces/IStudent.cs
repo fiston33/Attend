@@ -5,6 +5,9 @@ namespace Application.Interfaces
     public interface IStudent
     {
         public List<Student> GetAllStudent();
+        public void AddStudent(Student student);
+
+        public Student? GetStudentById(int id);
     }
 }
 

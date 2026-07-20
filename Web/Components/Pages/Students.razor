@@ -7,7 +7,8 @@
 
 <h1>Students</h1>
 
-<table>
+<a href="/Students/add" class="btn btn-primary mt-3">Add Students</a>
+<table class="table">
 
     <tr>
         <th>ID</th>
@@ -17,13 +18,14 @@
         <th>Phone</th>
         <th>Email</th>
         <th>Reg Number</th>
-        <th>Address</th>
+        @* <th>Address</th>
         <th>Mother's Name</th>
         <th>Father's Name</th>
         <th>Mother's Phone</th>
         <th>Father's Phone</th>
         <th>User Added</th>
-        <th>Date Added</th>
+        <th>Date Added</th> *@
+        <th>Details</th>
 
     </tr>
 
@@ -38,13 +40,14 @@
         <td>@student.Phone</td>
         <td>@student.Email</td>
         <td>@student.RegNumber</td>
-        <td>@student.Address</td>
+        @* <td>@student.Address</td>
         <td>@student.MotherName</td>
         <td>@student.FatherName</td>
         <td>@student.MotherPhone</td>
         <td>@student.FatherPhone</td>
         <td>@student.UserAdded</td>
-        <td>@student.DateAdded</td>
+        <td>@student.DateAdded</td> *@
+        <td><a href="/Students/@student.Id" class="btn btn-primary mt-3">View Details</a></td>
     </tr>
     }
 </table>
