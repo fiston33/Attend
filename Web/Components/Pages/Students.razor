@@ -1,6 +1,7 @@
 @page "/Students"
 @using Application.Services.StudentServices;
 @using Domain.Entities
+@using Application.DTOs
 
 @inject IStudentService StudentService
 
@@ -25,7 +26,8 @@
         <th>Father's Phone</th>
         <th>User Added</th>
         <th>Date Added</th> *@
-        <th>Details</th>
+        <th>Status</th>
+        <th>Actions</th>
 
     </tr>
 
@@ -47,7 +49,12 @@
         <td>@student.FatherPhone</td>
         <td>@student.UserAdded</td>
         <td>@student.DateAdded</td> *@
-        <td><a href="/Students/@student.Id" class="btn btn-primary mt-3">View Details</a></td>
+        <td>@student.Status</td>
+        <td>
+            <a href="/Students/@student.Id" class="btn btn-primary mt-3">View Details</a>
+            @* <a href="/Students/@student.Id" class="btn btn-primary">Update</a>
+            <a href="/Students/@student.Id" class="btn btn-danger ml-2">Delete</a> *@
+        </td>
     </tr>
     }
 </table>
@@ -55,10 +62,12 @@
 
 @code{
 
-    private List<Student> students = new List<Student>();
+    private List<GetStudentDTO> students = new List<GetStudentDTO>();
 
     protected override void OnInitialized()
     {
         students = StudentService.GetAllStudent();
     }
+
+    
 }

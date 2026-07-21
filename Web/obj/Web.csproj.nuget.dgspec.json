@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\MYPROJECTS\\MyFirstBlazor\\Attend\\Web\\Web.csproj": {}
+    "C:\\MYPROJECTS\\MyFirstBlazor\\Attend\\web\\Web.csproj": {}
   },
   "projects": {
     "C:\\MYPROJECTS\\MyFirstBlazor\\Attend\\Core\\Application\\Application.csproj": {
@@ -1045,14 +1045,14 @@
         }
       }
     },
-    "C:\\MYPROJECTS\\MyFirstBlazor\\Attend\\Web\\Web.csproj": {
+    "C:\\MYPROJECTS\\MyFirstBlazor\\Attend\\web\\Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\MYPROJECTS\\MyFirstBlazor\\Attend\\Web\\Web.csproj",
+        "projectUniqueName": "C:\\MYPROJECTS\\MyFirstBlazor\\Attend\\web\\Web.csproj",
         "projectName": "Web",
-        "projectPath": "C:\\MYPROJECTS\\MyFirstBlazor\\Attend\\Web\\Web.csproj",
+        "projectPath": "C:\\MYPROJECTS\\MyFirstBlazor\\Attend\\web\\Web.csproj",
         "packagesPath": "C:\\Users\\Fiston\\.nuget\\packages\\",
-        "outputPath": "C:\\MYPROJECTS\\MyFirstBlazor\\Attend\\Web\\obj\\",
+        "outputPath": "C:\\MYPROJECTS\\MyFirstBlazor\\Attend\\web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Fiston\\AppData\\Roaming\\NuGet\\NuGet.Config"

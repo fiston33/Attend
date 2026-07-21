@@ -1,13 +1,11 @@
-@using Application.Services.StudentServices
+@page "/students/update/{id:int}"
 @using Application.DTOs
-@rendermode InteractiveServer 
-@inject NavigationManager Navigation 
+@using Application.Services.StudentServices
+@rendermode InteractiveServer
+@inject NavigationManager Navigation
 @inject IStudentService StudentService
-
-@page "/Students/add"
 <div>
-    <EditForm Model="student" OnValidSubmit="SaveStudent" >
-        <h1>Add New Student</h1>
+    <EditForm OnValidSubmit="EditStudent" Model="student">
         <div class="form-group">
             <label for="name" >Name:</label>
             <InputText class="form-control" id="name" @bind-Value="student.Name" />
@@ -15,7 +13,7 @@
         <div class="form-group">
             <label for="sex" >Sex:</label>
             <InputSelect id="sex" class="form-control" @bind-Value="student.Sex">
-                <option value="">Select Sex</option>
+                <option value="">--- Select Sex</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
             </InputSelect>
@@ -62,16 +60,37 @@
             <InputText id="iloveyouma" class="form-control" @bind-Value="student.FatherPhone" />
         </div>
 
-       
-        <button type="submit" class="btn btn-primary mt-3">Add Student</button>
+        
+        <button type="submit" class="btn btn-primary">Update</button>
     </EditForm>
 </div>
-    
 @code{
-    private AddStudentDTO student = new ();
-    private void SaveStudent()
+    [Parameter]
+    public int Id{get;set;}
+    private GetStudentDTO? existingstudent;
+    private UpdateStudentDTO student = new();
+    protected override void OnParametersSet()
     {
-        StudentService.AddStudent(student);
-        Navigation.NavigateTo("/Students");
+        existingstudent= StudentService.GetStudentById(Id);
+        if (existingstudent != null)
+        {
+            student.Address = existingstudent.Address;
+            student.DateOfBirth = existingstudent.DateOfBirth;
+            student.Email = existingstudent.Email;
+            student.FatherName = existingstudent.FatherName;
+            student.FatherPhone = existingstudent.FatherPhone;
+            student.Id = existingstudent.Id;
+            student.MotherName = existingstudent.MotherName;
+            student.MotherPhone = existingstudent.MotherPhone;
+            student.Name = existingstudent.Name;
+            student.Phone = existingstudent.Phone;
+            student.RegNumber = existingstudent.RegNumber;
+            student.Sex = existingstudent.Sex;
+        }
+    }
+    private void EditStudent()
+    {
+        StudentService.UpdateStudent(student);
+        Navigation.NavigateTo("/students");
     }
 }

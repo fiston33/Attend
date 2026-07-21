@@ -1,5 +1,5 @@
 @using Application.Services.StudentServices
-@using Domain.Entities
+@using Application.DTOs
 @inject IStudentService StudentService
 @page "/Students/{id:int}"
 
@@ -84,14 +84,19 @@
                     <div class="col-md-8">@student.DateAdded</div>
                 </div>
 
+                 <div class="row mb-3">
+                    <div class="col-md-4 font-weight-bold">Status:</div>
+                    <div class="col-md-8">@student.Status</div>
+                </div>
+
 
 
                 
                 
                 <div class="row">
                     <div class="col text-right">
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger ml-2">Delete</button>
+                        <a href="/students/update/@student.Id"><button class="btn btn-primary">Edit</button></a>
+                        <a href="/students/delete/@student.Id"><button class="btn btn-danger ml-2">Delete</button></a>
                     </div>
                 </div>
             }
@@ -111,7 +116,7 @@
 @code{
     [Parameter]
     public int Id{get;set;}
-    private Student? student;
+    private GetStudentDTO? student;
     protected override void OnParametersSet()
     {
         student = StudentService.GetStudentById(Id);

@@ -30,12 +30,10 @@ namespace Domain.Entities
 
         public DateTime DateAdded {get; set;}
 
-        // public string Status {get; set;} Enum
+        public string Status { get; set; }
 
           //Navigation Property: One Education Level can have many Classes
-        public ICollection<ClassStudent> classStudents{get;set;}
-
-         public ICollection<Attendance> attends{get;set;}
+      
 
 
 
