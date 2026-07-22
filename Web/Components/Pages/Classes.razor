@@ -1,8 +1,12 @@
 @page "/Classes"
 @using Application.Services.ClassServices
 @using Domain.Entities
+@inject NavigationManager navigation 
+@rendermode InteractiveServer
 
 @inject IClassService ClassService
+
+<a href="/Classes/Add" class="btn btn-primary mt-3">Add Class</a>
 <table>
     <tr>
         <th>Class ID</th>

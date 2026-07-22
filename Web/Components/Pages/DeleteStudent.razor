@@ -6,7 +6,7 @@
 @inject NavigationManager Navigation
 @inject IStudentService StudentService
 <div>
-    <EditForm OnValidSubmit="RemoveStudent" Model="student">
+    <EditForm OnValidSubmit="RemoveStudentAsync" Model="student">
         <label>Are You Sure Want to Delete? @student.Id</label>
         <button type="submit" class="btn btn-primary">Delete</button>
         <a href="/students"><button class="btn btn-danger ml">Cancel</button></a>
@@ -17,18 +17,18 @@
     public int Id{get;set;}
     private GetStudentDTO? existingstudent;
     private DeleteStudentDTO student = new();
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
-        existingstudent= StudentService.GetStudentById(Id);
+        existingstudent= await StudentService.GetStudentByIdAsync(Id);
         if (existingstudent != null)
         {
             student.Id = existingstudent.Id;
             student.Status = existingstudent.Status;
         }
     }
-    private void RemoveStudent()
+    private async Task RemoveStudentAsync()
     {
-        StudentService.DeleteStudent(student);
+      await  StudentService.DeleteStudentAsync(student);
         Navigation.NavigateTo("/students");
     }
 }
