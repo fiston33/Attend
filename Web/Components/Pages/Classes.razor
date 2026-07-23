@@ -7,13 +7,14 @@
 @inject IClassService ClassService
 
 <a href="/Classes/Add" class="btn btn-primary mt-3">Add Class</a>
-<table>
+<table class="table">
     <tr>
         <th>Class ID</th>
         <th>Class Name</th>
-        <th>Department</th>
-        <th>Faculity</th>
+        @* <th>Department</th>
+        <th>Faculity</th> *@
         <th>Teacher</th>
+        <th>Actions</th>
     </tr>
 
     @foreach(var clever in kennedy){
@@ -21,9 +22,14 @@
     <tr>
         <td>@clever.id</td>
         <td>@clever.classname</td>
-        <td>@clever.department</td>
-        <td>@clever.FacultyId</td>
+        @* <td>@clever.department</td>
+        <td>@clever.FacultyId</td> *@
         <td>@clever.teacher</td>
+          <td>
+            <a href="#" class="btn btn-primary mt-3">View Details</a>
+            @* <a href="/Students/@student.Id" class="btn btn-primary">Update</a>
+            <a href="/Students/@student.Id" class="btn btn-danger ml-2">Delete</a> *@
+        </td>
     </tr>
 
     }

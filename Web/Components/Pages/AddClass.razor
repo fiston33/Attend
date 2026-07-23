@@ -5,7 +5,7 @@
 @inject NavigationManager navigation
 @page "/Classes/Add"
 <div>
-    <editform Model="classe" OnValidSubmit="SaveClass">
+    <EditForm Model="classe" OnValidSubmit="SaveClass">
         <h1>Add Classes</h1>
 
         <div class="form-group">
@@ -21,9 +21,21 @@
             <label class="form-label">Teacher:</label>
             <InputText class="form-control" @bind-Value="classe.teacher" />
         </div>
+
+         @* <div class="form-group">
+            <label class="form-label">Faculty:</label>
+            <InputText class="form-control" @bind-Value="classe.FacultyId" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Education:</label>
+            <InputText class="form-control" @bind-Value="classe.EducationLevelId" />
+        </div> *@
         
+
+
         <button type="submit" class="btn btn-primary">Save</button>
-    </editform>
+    </EditForm>
   </div>
 
 @code{
@@ -34,3 +46,5 @@
     navigation.NavigateTo( "/Classes");
     }
 }
+
+
