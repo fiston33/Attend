@@ -1,10 +1,145 @@
 @using Application.Services.StudentServices
 @using Application.DTOs
-@rendermode InteractiveServer 
-@inject NavigationManager Navigation 
+@rendermode InteractiveServer
+@inject NavigationManager Navigation
 @inject IStudentService StudentService
 
-@page "/Students/add"
+
+
+
+
+
+
+
+
+<MudDialog>
+    <TitleContent>Add Student</TitleContent>
+    <DialogContent>
+        <EditForm Model="student" OnValidSubmit="SaveStudentAsync">
+            <MudGrid>
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="student.Name" Margin="Margin.Dense" Variant="Variant.Outlined"
+                    Label="Name"  Placeholder="Fullname">
+                    </MudTextField>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudSelect T="string" @bind-Value="student.Sex" Margin="Margin.Dense" Variant="Variant.Outlined"
+                              Label="Sex" Placeholder="select sex">
+                        <MudSelectItem Value="@("Male")">Male</MudSelectItem>
+                        <MudSelectItem Value="@("Female")">Female</MudSelectItem>
+
+                    </MudSelect>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDatePicker Date="student.DateOfBirth"
+                                   DateChanged="date => student.DateOfBirth = date ?? default" Margin="Margin.Dense"
+                                   DateFormat="yyyy-MM-dd" Variant="Variant.Outlined" Label="Date Of Birth" Placeholder="dd/mm/yyyy">
+                    </MudDatePicker>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudTextField @bind-Value="student.Phone" Margin="Margin.Dense" Variant="Variant.Outlined"
+                                Label="Phone"  Placeholder="078 2828 2828">
+                    </MudTextField>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudTextField @bind-Value="student.Email" Margin="Margin.Dense" Variant="Variant.Outlined"
+                                Label="Email"  Placeholder="mellissa@gmail.com">
+                    </MudTextField>
+                </MudItem>
+                
+                
+                <MudItem xs="12">
+                    <MudTextField @bind-Value="student.Address" Margin="Margin.Dense" Variant="Variant.Outlined"
+                                Label="Address"  Placeholder="Kigali-Rwanda">
+                    </MudTextField>
+                </MudItem>
+
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="student.RegNumber" Margin="Margin.Dense" Variant="Variant.Outlined"
+                                Label="Reg Number"  Placeholder="FIS001546">
+                    </MudTextField>
+                </MudItem>
+
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="student.MotherName" Margin="Margin.Dense" Variant="Variant.Outlined"
+                                Label="Mother's Name"  Placeholder="Jacqueline MUKANDUTIYE">
+                    </MudTextField>
+                </MudItem>
+
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="student.FatherName" Margin="Margin.Dense" Variant="Variant.Outlined"
+                                Label="Father's Name"  Placeholder="Eric MURWANASHYAKA">
+                    </MudTextField>
+                </MudItem>
+
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="student.MotherPhone" Margin="Margin.Dense" Variant="Variant.Outlined"
+                                Label="Mother's Phone"  Placeholder="+250 790 279 865">
+                    </MudTextField>
+                </MudItem>
+
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="student.FatherPhone" Margin="Margin.Dense" Variant="Variant.Outlined"
+                                Label="Father's Phone"  Placeholder="+250 782 687 292">
+                    </MudTextField>
+                </MudItem>
+
+
+
+
+
+                <MudItem xs="12">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true"
+                               ButtonType="ButtonType.Submit">
+                        SAVE
+                    </MudButton>
+                </MudItem>
+
+            </MudGrid>
+        </EditForm>
+
+    </DialogContent>
+
+</MudDialog>
+
+  
+@code {
+
+    [CascadingParameter]
+    private IMudDialogInstance MudDialog { get; set; }
+    private AddStudentDTO student = new();
+
+    private async Task SaveStudentAsync()
+    {
+        await StudentService.AddStudentAsync(student);
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*
+
+
 <div>
     <EditForm Model="student" OnValidSubmit="SaveStudentAsync" >
         <h1>Add New Student</h1>
@@ -20,6 +155,7 @@
                 <option value="Female">Female</option>
             </InputSelect>
         </div>
+
         <div class="form-group">
             <label for="dob" >Date Of Birth:</label>
             <InputDate id="dob" class="form-control" @bind-Value="student.DateOfBirth" />
@@ -65,13 +201,4 @@
        
         <button type="submit" class="btn btn-primary mt-3">Add Student</button>
     </EditForm>
-</div>
-    
-@code{
-    private AddStudentDTO student = new ();
-    private async Task SaveStudentAsync()
-    {
-       await StudentService.AddStudentAsync(student);
-        Navigation.NavigateTo("/Students");
-    }
-}
+</div> *@

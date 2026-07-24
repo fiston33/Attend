@@ -8,9 +8,12 @@ namespace Application.Interfaces
 
         public void AddClass(Class classe);
 
+        // public Class GetClassById(int id);
+
 
     }
 }
+
 
 
 

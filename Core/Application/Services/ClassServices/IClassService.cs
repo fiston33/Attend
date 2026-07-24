@@ -7,6 +7,8 @@ namespace Application.Services.ClassServices
         public List<Class>  GetAllClasses();
 
         public void AddClass(Class classe);
+
+        // public Class GetClassById(Class classe);
     }
 }
 

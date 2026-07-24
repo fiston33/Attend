@@ -23,6 +23,13 @@ namespace Application.Services.ClassServices
             _classs.AddClass(classe);
         }
 
+        // public void GetClassById(int id)
+        // {
+        //     _classs.GetClassById(id);
+        // }
+
+        
+
     }
 }
 

@@ -27,6 +27,12 @@ namespace Infrastructure.Repositories
             _dbcontext.SaveChanges();
         }
 
+        // public Class GetClassById(int id)
+        // {
+        //     _dbcontext.Classes.Update(classs);
+        //     _dbcontext.SaveChanges();
+        // }
+
         
         
           

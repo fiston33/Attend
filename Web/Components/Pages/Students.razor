@@ -3,71 +3,120 @@
 @using Domain.Entities
 @using Application.DTOs
 
+@inject IDialogService DialogService
 @inject IStudentService StudentService
 
 
-<h1>Students</h1>
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-4" >
+        <MudDataGrid T="GetStudentDTO" MultiSelection="true" Items="@students" SortMode="SortMode.Multiple" Filterable="true" QuickFilter="@_quickFilter"
+            Hideable="true" RowClick="@RowClicked" RowContextMenuClick="RowRightClicked" SelectedItemsChanged="@SelectedItemsChanged">
+            
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Students</MudText>
+                <MudSpacer />
+                <MudContainer MaxWidth="MaxWidth.ExtraSmall" Class="d-none d-md-flex">
+                  <MudTextField 
+                    @bind-Value="_searchString" 
+                    Placeholder="Search" 
+                    Adornment="Adornment.Start" 
+                    Immediate="true"
+                    AdornmentIcon="@Icons.Material.Filled.Search" 
+                    IconSize="Size.Medium" 
+                    Variant="Variant.Outlined"
+                    Margin="Margin.Dense"
+                    Class="mt-1 w-100">
+                  </MudTextField>
+                </MudContainer>
 
-<a href="/Students/add" class="btn btn-primary mt-3">Add Students</a>
-<table class="table">
+                <MudButton Color="Color.Primary" Variant="Variant.Filled" Class="ml-4" OnClick="() => OpenDialogAsync(_closeButton)" >Add Student</MudButton>
+            
+            </ToolBarContent>
 
-    <tr>
-        <th>ID</th>
-        <th>Full Name</th>
-        <th>Sex</th>
-        <th>DateOfBirth</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Reg Number</th>
-        @* <th>Address</th>
-        <th>Mother's Name</th>
-        <th>Father's Name</th>
-        <th>Mother's Phone</th>
-        <th>Father's Phone</th>
-        <th>User Added</th>
-        <th>Date Added</th> *@
-        <th>Status</th>
-        <th>Actions</th>
+            
+            <Columns>
+                <SelectColumn T="GetStudentDTO" />
+                <PropertyColumn Property="x => x.Id" Title="Nr" Sortable="true" Filterable="false" />
+                <PropertyColumn Property="x => x.Name" />
+                <PropertyColumn Property="x => x.Sex" SortBy="@_sortBy" />
+                <PropertyColumn Property="x => x.DateOfBirth" />
+                <PropertyColumn Property="x => x.Phone" Title="Phone" />
+                <PropertyColumn Property="x => x.Email" Title="Email" />
+            </Columns>
 
-    </tr>
+            <PagerContent>
+                <MudDataGridPager T="GetStudentDTO" />
+            </PagerContent>
 
-
-    @foreach(var student in students){
-
-    <tr>
-        <td>@student.Id</td>
-        <td>@student.Name</td>
-        <td>@student.Sex</td>
-        <td>@student.DateOfBirth</td>
-        <td>@student.Phone</td>
-        <td>@student.Email</td>
-        <td>@student.RegNumber</td>
-        @* <td>@student.Address</td>
-        <td>@student.MotherName</td>
-        <td>@student.FatherName</td>
-        <td>@student.MotherPhone</td>
-        <td>@student.FatherPhone</td>
-        <td>@student.UserAdded</td>
-        <td>@student.DateAdded</td> *@
-        <td>@student.Status</td>
-        <td>
-            <a href="/Students/@student.Id" class="btn btn-primary mt-3">View Details</a>
-            @* <a href="/Students/@student.Id" class="btn btn-primary">Update</a>
-            <a href="/Students/@student.Id" class="btn btn-danger ml-2">Delete</a> *@
-        </td>
-    </tr>
-    }
-</table>
-
+        </MudDataGrid>
+</MudContainer>
 
 @code{
-
-    private List<GetStudentDTO> students = new List<GetStudentDTO>();
-
-    protected  override async Task OnInitializedAsync()
-    {
-        students = await StudentService.GetAllStudentAsync();
-    }
-
     
-}
+
+        private string _searchString = string.Empty;
+        private bool _sortNameByLength;
+        private List<string> _events = new();
+
+        void RowClicked(DataGridRowClickEventArgs<GetStudentDTO> args)
+        {
+            _events.Insert(0, $"Event = RowClick, Index = {args.RowIndex}, Data = {System.Text.Json.JsonSerializer.Serialize(args.Item)}");
+        }
+        
+        void RowRightClicked(DataGridRowClickEventArgs<GetStudentDTO> args)
+        {
+            _events.Insert(0, $"Event = RowRightClick, Index = {args.RowIndex}, Data = {System.Text.Json.JsonSerializer.Serialize(args.Item)}");
+        }
+
+        void SelectedItemsChanged(HashSet<GetStudentDTO> items)
+        {
+            _events.Insert(0, $"Event = SelectedItemsChanged, Data = {System.Text.Json.JsonSerializer.Serialize(items)}");
+        }
+
+
+        private Func<GetStudentDTO, object> _sortBy => x =>
+        {
+            if (_sortNameByLength)
+                return x.Name.Length;
+            else
+                return x.Name;
+        };
+        // quick filter - filter globally across multiple columns with the same input
+        private Func<GetStudentDTO, bool> _quickFilter => x =>
+        {
+            if (string.IsNullOrWhiteSpace(_searchString))
+                return true;
+
+            if (x.Name.Contains(_searchString, StringComparison.OrdinalIgnoreCase))
+                return true;
+
+            if (x.Sex.Contains(_searchString, StringComparison.OrdinalIgnoreCase))
+                return true;
+
+            if ($"{x.Phone} {x.Email}".Contains(_searchString))
+                return true;
+
+            return false;
+        };
+        private List<GetStudentDTO> students  = new List<GetStudentDTO>();
+        
+        protected override async Task OnInitializedAsync()
+        {
+            students= await StudentService.GetAllStudentAsync();
+
+        }
+
+            private readonly DialogOptions _closeButton = new() { CloseButton = true };
+        private async Task OpenDialogAsync(DialogOptions options)
+        {
+            var dialog = await DialogService.ShowAsync<AddStudents>("Add New Student", options);
+                
+            var result = await dialog.Result;
+
+            if (result is not null && !result.Canceled)
+            {
+                students = await StudentService.GetAllStudentAsync();
+            }
+        }
+
+
+    }
